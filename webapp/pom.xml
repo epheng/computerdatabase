@@ -11,13 +11,11 @@
   <dependencies>
   	<dependency>
   		<groupId>com.excilys</groupId>
-	    <artifactId>service</artifactId>
-	    <version>${parent.version}</version>
+	    <artifactId>binding</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>com.excilys</groupId>
-	    <artifactId>binding</artifactId>
-	    <version>${parent.version}</version>
+	    <artifactId>service</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>javax.servlet</groupId>

@@ -20,7 +20,8 @@ import mapper.CompanyMapper;
 import mapper.ComputerMapper;
 import model.Company;
 import model.Computer;
-import service.DatabaseService;
+import service.CompanyService;
+import service.ComputerService;
 
 @Controller
 public class ControllerCDB {
@@ -31,8 +32,14 @@ public class ControllerCDB {
 	@Autowired
 	CompanyMapper companyMapper;
 	
+//	@Autowired
+//	DatabaseService service;
+	
 	@Autowired
-	DatabaseService service;
+	ComputerService computerService;
+	
+	@Autowired
+	CompanyService companyService;
 	
 	int nbComputerPerPage = 10;
 	int nbPage = 1;
@@ -65,10 +72,10 @@ public class ControllerCDB {
 			@RequestParam(value = "page", required = false) String page,
 			@RequestParam(value = "length", required = false) String length) {
 		setPagination(page, length);
-		List<Computer> computerList = service.findComputers(nbPage, nbComputerPerPage);
+		List<Computer> computerList = computerService.findComputers(nbPage, nbComputerPerPage);
 		List<ComputerDTO> computerDtoList = initComputerDtoList(computerList);
-		int totalNbComputers = service.countComputers();		
-		List<Company> companyList = service.findAllCompanies();
+		int totalNbComputers = computerService.countComputers();		
+		List<Company> companyList = companyService.findAllCompanies();
 		List<CompanyDTO> companyDtoList = initCompanyDtoList(companyList);
 		int nbPagination = totalNbComputers % nbComputerPerPage == 0 ?
 				totalNbComputers / nbComputerPerPage :totalNbComputers / nbComputerPerPage + 1;
@@ -83,9 +90,9 @@ public class ControllerCDB {
 	@RequestMapping(value = "/editComputer", method = RequestMethod.GET)
 	public String editComputer(ModelMap model,
 			@RequestParam(value = "id") int id) {
-		Computer computer = service.findComputerById(id);
+		Computer computer = computerService.findComputerById(id);
 		ComputerDTO computerDto = computerMapper.toComputerDTO(computer);
-		List<Company> companyList = service.findAllCompanies();
+		List<Company> companyList = companyService.findAllCompanies();
 		List<CompanyDTO> companyDtoList = initCompanyDtoList(companyList);
 		model.addAttribute("computer", computerDto);
 		model.addAttribute("companies", companyDtoList);
@@ -95,7 +102,7 @@ public class ControllerCDB {
 	
 	@RequestMapping(value = "/addComputer", method = RequestMethod.GET)
 	public String addComputer(ModelMap model) {
-		List<Company> companyList = service.findAllCompanies();
+		List<Company> companyList = companyService.findAllCompanies();
 		List<CompanyDTO> companyDtoList = initCompanyDtoList(companyList);
 		model.addAttribute("companies", companyDtoList);
 		model.addAttribute("computerDto", new ComputerDTO());
@@ -105,12 +112,12 @@ public class ControllerCDB {
 	@RequestMapping(value = "/addComputer", method = RequestMethod.POST)
 	public String createComputer(@ModelAttribute("computerDto") @Valid ComputerDTO computerDto, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
-			List<Company> companyList = service.findAllCompanies();
+			List<Company> companyList = companyService.findAllCompanies();
 			List<CompanyDTO> companyDtoList = initCompanyDtoList(companyList);
 			model.addAttribute("companies", companyDtoList);
 			return "addComputer";
 		} else {
-			service.addComputer(computerMapper.toComputer(computerDto));
+			computerService.addComputer(computerMapper.toComputer(computerDto));
 			return "redirect:dashboard";
 		}
 	}
@@ -118,20 +125,20 @@ public class ControllerCDB {
 	@RequestMapping(value = "/editComputer", method = RequestMethod.POST)
 	public String updateComputer(@ModelAttribute("computerDto") @Valid ComputerDTO computerDto, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
-			List<Company> companyList = service.findAllCompanies();
+			List<Company> companyList = companyService.findAllCompanies();
 			List<CompanyDTO> companyDtoList = initCompanyDtoList(companyList);
 			model.addAttribute("companies", companyDtoList);
 			model.addAttribute("computer", computerDto);
 			return "editComputer";
 		} else {
-			service.updateComputer(computerMapper.toComputer(computerDto));
+			computerService.updateComputer(computerMapper.toComputer(computerDto));
 			return "redirect:dashboard";
 		}
 	}
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.POST)
 	public String deleteComputers(@RequestParam(value = "selection") String selection) {
-		service.deleteComputers(selection);
+		computerService.deleteComputers(selection);
 		return "redirect:dashboard";
 	}
 	
@@ -141,9 +148,9 @@ public class ControllerCDB {
 			@RequestParam(value = "length", required = false) String length,
 			@RequestParam(value = "search") String search) {
 		setPagination(page, length);
-		List<Computer> computerList = service.searchComputersByNameOrCompany(search);
+		List<Computer> computerList = computerService.searchComputersByNameOrCompany(search);
 		List<ComputerDTO> computerDtoList = initComputerDtoList(computerList);
-		int totalNbComputers = service.countComputers();
+		int totalNbComputers = computerService.countComputers();
 		model.addAttribute("computerDtoList", computerDtoList);
 		model.addAttribute("nbComputer", totalNbComputers);
 		model.addAttribute("currentNbPage", nbPage);
@@ -154,7 +161,7 @@ public class ControllerCDB {
 	
 	@RequestMapping(value = "/dashboard", params = "action=deleteCompany", method = RequestMethod.POST)
 	public String deleteCompany(@RequestParam(value = "selectionCompany") String selectionCompany) {
-		service.deleteCompany(selectionCompany);
+		companyService.deleteCompany(selectionCompany);
 		return "redirect:dashboard";
 	}
 	

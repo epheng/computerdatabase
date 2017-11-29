@@ -6,19 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dao.CompanyDAO;
 import dao.ComputerDAO;
-import model.Company;
 import model.Computer;
 
 @Component
-public class DatabaseService {
+public class ComputerService {
 	
 	@Autowired
 	ComputerDAO computerDao;
-	
-	@Autowired
-	CompanyDAO companyDao;
 	
 	public void addComputer(Computer computer) {
 		String computerName = computer.getName();
@@ -26,10 +21,6 @@ public class DatabaseService {
 		Timestamp discontinuedDate = computer.getDiscontinued();
 		int companyId = computer.getCompanyId();
 		computerDao.createComputer(computerName, introducedDate, discontinuedDate, companyId);
-	}
-	
-	public int getCompanyIdbyName(String name) {
-		return companyDao.getCompanyIdByName(name);
 	}
 	
 	public Computer findComputerById(int id) {
@@ -73,17 +64,8 @@ public class DatabaseService {
 		}
 	}
 	
-	public List<Company> findAllCompanies() {
-		return companyDao.listAllCompanies();
-	}
-	
 	public List<Computer> searchComputersByNameOrCompany(String match) {
 		return computerDao.findComputersByNameOrCompany(match);
-	}
-	
-	public void deleteCompany(String selectionCompany) {
-		int companyId = Integer.parseInt(selectionCompany);
-		companyDao.deleteCompanyById(companyId);
 	}
 	
 }

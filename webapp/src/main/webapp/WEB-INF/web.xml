@@ -13,6 +13,7 @@
 		<url-pattern>/dashboard</url-pattern>
 		<url-pattern>/editComputer</url-pattern>
 		<url-pattern>/addComputer</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<error-page>
@@ -29,21 +30,5 @@
 		<error-code>500</error-code>
 		<location>/views/500.html</location>
 	</error-page>
-	
-	<filter>
-	    <filter-name>springSecurityFilterChain</filter-name>
-	    <filter-class>
-	        org.springframework.web.filter.DelegatingFilterProxy
-	    </filter-class>
-	    <init-param>
-	        <param-name>targetBeanName</param-name>
-	        <param-value>springSecurityFilterChain</param-value>
-	    </init-param>
-	</filter>
-	
-	<filter-mapping>
-	    <filter-name>springSecurityFilterChain</filter-name>
-	    <url-pattern>/*</url-pattern>
-	</filter-mapping>
 	
 </web-app>

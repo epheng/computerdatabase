@@ -11,6 +11,7 @@
   	<module>service</module>
   	<module>binding</module>
   	<module>webapp</module>
+  	<module>webservice</module>
   </modules>
   
   <properties>
@@ -28,6 +29,7 @@
   	<hibernate-validator-version>5.4.1.Final</hibernate-validator-version>
   	<hibernate-version>5.2.12.Final</hibernate-version>
   	<spring-security-version>5.0.0.RELEASE</spring-security-version>
+  	<jackson-version>2.9.2</jackson-version>
   </properties>
   
   <dependencyManagement>
@@ -56,6 +58,26 @@
 		    <groupId>com.excilys</groupId>
 		    <artifactId>webapp</artifactId>
 		    <version>${project.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>${jackson-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>${jackson-version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
@@ -133,6 +155,12 @@
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>servlet-api</artifactId>
 		    <version>${java-servlet-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>javax.servlet</groupId>

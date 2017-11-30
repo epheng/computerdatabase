@@ -13,12 +13,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		auth.inMemoryAuthentication().passwordEncoder(encoder).withUser("user").password(encoder.encode("pwd")).roles("USER");
+		auth
+		.inMemoryAuthentication()
+		.passwordEncoder(encoder)
+		.withUser("user")
+		.password(encoder.encode("pwd"))
+		.roles("USER");
 	}
 	
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/webapp/**").permitAll().anyRequest()
-        .hasRole("USER").and()
+		http
+		.authorizeRequests()
+		.antMatchers("/webapp/**")
+		.permitAll()
+		.anyRequest()
+        .hasRole("USER")
+        .and()
         .formLogin()
         .permitAll()
         .defaultSuccessUrl("/dashboard", true);

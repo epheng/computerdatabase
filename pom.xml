@@ -22,11 +22,12 @@
   	<jstl-version>1.2</jstl-version>
   	<selenium-version>3.7.0</selenium-version>
   	<hikaricp-version>2.7.1</hikaricp-version>
-  	<spring-version>4.3.12.RELEASE</spring-version>
+  	<spring-version>5.0.0.RELEASE</spring-version>
   	<logback-version>1.2.3</logback-version>
   	<javax-validation-version>1.1.0.Final</javax-validation-version>
   	<hibernate-validator-version>5.4.1.Final</hibernate-validator-version>
   	<hibernate-version>5.2.12.Final</hibernate-version>
+  	<spring-security-version>5.0.0.RELEASE</spring-security-version>
   </properties>
   
   <dependencyManagement>
@@ -34,27 +35,37 @@
 	  	<dependency>
 		    <groupId>com.excilys</groupId>
 		    <artifactId>binding</artifactId>
-		    <version>0.0.4-SNAPSHOT</version>
+		    <version>${project.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.excilys</groupId>
 		    <artifactId>core</artifactId>
-		    <version>0.0.4-SNAPSHOT</version>
+		    <version>${project.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.excilys</groupId>
 		    <artifactId>persistence</artifactId>
-		    <version>0.0.4-SNAPSHOT</version>
+		    <version>${project.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.excilys</groupId>
 		    <artifactId>service</artifactId>
-		    <version>0.0.4-SNAPSHOT</version>
+		    <version>${project.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.excilys</groupId>
 		    <artifactId>webapp</artifactId>
-		    <version>0.0.4-SNAPSHOT</version>
+		    <version>${project.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring-security-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${spring-security-version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework</groupId>

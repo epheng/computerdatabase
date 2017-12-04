@@ -32,9 +32,6 @@ public class ControllerCDB {
 	@Autowired
 	CompanyMapper companyMapper;
 	
-//	@Autowired
-//	DatabaseService service;
-	
 	@Autowired
 	ComputerService computerService;
 	
@@ -148,7 +145,7 @@ public class ControllerCDB {
 			@RequestParam(value = "length", required = false) String length,
 			@RequestParam(value = "search") String search) {
 		setPagination(page, length);
-		List<Computer> computerList = computerService.searchComputersByNameOrCompany(search);
+		List<Computer> computerList = computerService.searchComputersByName(search);
 		List<ComputerDTO> computerDtoList = initComputerDtoList(computerList);
 		int totalNbComputers = computerService.countComputers();
 		model.addAttribute("computerDtoList", computerDtoList);

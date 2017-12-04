@@ -21,7 +21,7 @@ public class ComputerDAO {
 
 	private final String findQuery = "FROM Computer WHERE id = :id";
 	private final String findSomeQuery = "FROM Computer";
-	private final String findByNameOrCompanyQuery = "FROM Computer WHERE name LIKE :name";
+	private final String findByNameQuery = "FROM Computer WHERE name LIKE :name";
 	private final String deleteByCompanyQuery = "DELETE Computer WHERE company_id = :id";
 	private final String countQuery = "SELECT COUNT(*) FROM Computer";
 	
@@ -50,10 +50,10 @@ public class ComputerDAO {
 		return computer;
 	}
 	
-	public List<Computer> findComputersByNameOrCompany(String match) {
+	public List<Computer> findComputersByName(String match) {
 		List<Computer> list = null;
 		try(Session session = sessionFactory.openSession();) {
-			Query<Computer> query = session.createQuery(findByNameOrCompanyQuery);
+			Query<Computer> query = session.createQuery(findByNameQuery);
 			query.setParameter("name", "%" + match + "%");
 			list = query.list();
 		} catch(HibernateException e) {

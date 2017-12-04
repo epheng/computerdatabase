@@ -64,8 +64,8 @@ public class ComputerService {
 		}
 	}
 	
-	public List<Computer> searchComputersByNameOrCompany(String match) {
-		return computerDao.findComputersByNameOrCompany(match);
+	public List<Computer> searchComputersByName(String match) {
+		return computerDao.findComputersByName(match);
 	}
 	
 }

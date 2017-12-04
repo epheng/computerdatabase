@@ -39,7 +39,7 @@ public class ComputerMapper {
 			Timestamp timestamp = new Timestamp(parsedDate.getTime());
 			return timestamp;
 		}
-		catch(ParseException e) {
+		catch(ParseException | NullPointerException e) {
 			return null;
 		}
 	}
